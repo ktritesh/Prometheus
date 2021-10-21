@@ -1,0 +1,43 @@
+Install Node exporter on frontend server
+
+sudo yum update -y
+cd opt/
+sudo wget https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
+sudo tar xf node_exporter-1.2.2.linux-amd64.tar.gz
+cd node_exporter-1.2.2.linux-amd64/
+sudo ./node_exporter
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Install prometheus on prometheus server
+
+sudo yum update
+sudo wget https://github.com/prometheus/prometheus/releases/download/v2.30.3/prometheus-2.30.3.linux-amd64.tar.gz
+sudo tar xf prometheus-2.30.3.linux-amd64.tar.gz
+sudo vi prometheus.yml ===> fix your frontend Ip addrs next to localhost and port no is 9100
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Install grafana on grafana server
+
+sudo yum update -y
+sudo vi /etc/yum.repos.d/grafana.repo
+
+and insert the below script
+[grafana]
+name=grafana
+baseurl=https://packages.grafana.com/oss/rpm
+repo_gpgcheck=1
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.grafana.com/gpg.key
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+
+sudo yum install grafana -y
+sudo systemctl start grafana-server
+sudo systemctl status grafana-server
+sudo systemctl enable grafana-server
+
+65.0.108.21:3000
+admin
+admin123
+
